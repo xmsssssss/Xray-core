@@ -31,16 +31,25 @@ func newUnicomStorage(streamSettings *internet.MemoryStreamConfig, config *Confi
 		return nil, errors.New(`empty "remoteFolder", it must be a WoPan directory id`)
 	}
 	if len(config.Secrets) < 1 || config.Secrets[0] == "" {
-		return nil, errors.New("unicom storage requires at least refreshToken in secrets[0]")
+		return nil, errors.New("unicom storage requires at least one secret (token or refreshToken)")
 	}
 
 	u := &unicomStorage{
-		folder:       config.RemoteFolder,
-		refreshToken: config.Secrets[0],
-		ids:          make(map[string]string),
-		httpClient:   newServiceClient(streamSettings, 60*time.Second, 32),
+		folder:     config.RemoteFolder,
+		ids:        make(map[string]string),
+		httpClient: newServiceClient(streamSettings, 60*time.Second, 32),
 	}
-	if len(config.Secrets) > 1 {
+
+	// 支持：
+	// secrets: ["refreshToken"] 或
+	// secrets: ["refreshToken", "accessToken"] 或
+	// secrets: ["accessToken"] (单传 accessToken)
+	if len(config.Secrets) == 1 {
+		// 单凭据：既设为 accessToken 尝试直接访问，也作为 refreshToken 备用
+		u.accessToken = config.Secrets[0]
+		u.refreshToken = config.Secrets[0]
+	} else {
+		u.refreshToken = config.Secrets[0]
 		u.accessToken = config.Secrets[1]
 	}
 
@@ -54,8 +63,13 @@ func newUnicomStorage(streamSettings *internet.MemoryStreamConfig, config *Confi
 		u.refreshToken = refreshToken
 	})
 
-	if err := u.client.InitData(); err != nil {
-		return nil, errors.New("failed to init unicom client data").Base(err)
+	// 优先只初始化上传节点 (InitZoneURL)，不强制调用需要 RefreshToken 的 InitData()
+	_ = u.client.InitZoneURL()
+	// 如果提供了 refreshToken 且无 accessToken，尝试刷新
+	if u.accessToken == "" && u.refreshToken != "" {
+		if err := u.client.InitData(); err != nil {
+			return nil, errors.New("failed to init unicom client data").Base(err)
+		}
 	}
 
 	return u, nil
