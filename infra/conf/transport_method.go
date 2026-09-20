@@ -823,6 +823,10 @@ func (c *XDriveConfig) Build() (proto.Message, error) {
 		if len(c.Template) == 0 {
 			return nil, errors.New(`service "template" needs a "template" object`)
 		}
+	case "unicom", "wopan":
+		if len(c.Secrets) < 1 || c.Secrets[0] == "" {
+			return nil, errors.New("unicom storage requires at least refreshToken in secrets[0]")
+		}
 	default:
 		return nil, errors.New("unsupported service")
 	}
