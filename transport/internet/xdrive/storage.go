@@ -43,6 +43,10 @@ func newStorage(streamSettings *internet.MemoryStreamConfig) (Storage, error) {
 		return sharedStorage(streamSettings, config, func() (Storage, error) {
 			return newTemplateStorage(streamSettings, config)
 		})
+	case "unicom", "wopan":
+		return sharedStorage(streamSettings, config, func() (Storage, error) {
+			return newUnicomStorage(streamSettings, config)
+		})
 	default:
 		return nil, errors.New("unsupported service: ", config.Service)
 	}

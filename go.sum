@@ -1,3 +1,5 @@
+github.com/OpenListTeam/wopan-sdk-go v0.2.2 h1:B91gBp4P/KwVxTAwZ8gYr+QrC6S/G/9OD9aNtFulEG0=
+github.com/OpenListTeam/wopan-sdk-go v0.2.2/go.mod h1:AkF/ynk4lbOnMeAyEEJK7R0Ryz3NBMPZCMOepjeYwSw=
 github.com/andybalholm/brotli v1.0.6 h1:Yf9fFpf49Zrxb9NlQaluyE92/+X7UVHlhMNJN2sxfOI=
 github.com/andybalholm/brotli v1.0.6/go.mod h1:fO7iG3H7G2nSZ7m0zPUDn85XEX2GTukHGRSepvi9Eig=
 github.com/apernet/quic-go v0.61.1-0.20260806010916-184d081eef3e h1:5mgtR5gwIgBKMiGI1QdXldZZ+SNor06Nbu1wCBulQBg=
@@ -181,3 +183,5 @@ lukechampine.com/blake3 v1.4.1 h1:I3Smz7gso8w4/TunLKec6K2fn+kyKtDxr/xcQEN84Wg=
 lukechampine.com/blake3 v1.4.1/go.mod h1:QFosUxmjB8mnrWFSNwKmvxHpfY72bmD2tQ0kBMM3kwo=
 mvdan.cc/gofumpt v0.12.0 h1:1Lbudkz2kpM9Cjz2pL4M19u7q+GaEhCTNf7N9mfpcho=
 mvdan.cc/gofumpt v0.12.0/go.mod h1:SmBHHrljiZu/uoypeKup3rFzP6eoC9UwCp2iH5E3jZA=
+resty.dev/v3 v3.0.0-beta.3 h1:3kEwzEgCnnS6Ob4Emlk94t+I/gClyoah7SnNi67lt+E=
+resty.dev/v3 v3.0.0-beta.3/go.mod h1:OgkqiPvTDtOuV4MGZuUDhwOpkY8enjOsjjMzeOHefy4=

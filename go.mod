@@ -41,6 +41,7 @@ require (
 )
 
 require (
+	github.com/OpenListTeam/wopan-sdk-go v0.2.2 // indirect
 	github.com/andybalholm/brotli v1.0.6 // indirect
 	github.com/google/btree v1.1.2 // indirect
 	github.com/google/gopacket v1.1.19 // indirect
@@ -62,4 +63,5 @@ require (
 	golang.org/x/tools v0.49.0 // indirect
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20260526163538-3dc84a4a5aaa // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
+	resty.dev/v3 v3.0.0-beta.3 // indirect
 )
