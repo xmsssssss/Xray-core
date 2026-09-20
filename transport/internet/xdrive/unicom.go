@@ -185,13 +185,10 @@ func (u *unicomStorage) Get(ctx context.Context, name string) ([]byte, error) {
 }
 
 func (u *unicomStorage) deleteFID(ctx context.Context, flat, fid string) error {
-	err := u.client.DeleteFile(wopan.SpaceTypePersonal, nil, []string{fid}, func(req *resty.Request) {
+	_ = u.client.DeleteFile(wopan.SpaceTypePersonal, nil, []string{fid}, func(req *resty.Request) {
 		req.SetContext(ctx)
 	})
 	u.forgetID(flat)
-	if err != nil {
-		return errors.New("unicom delete file failed for ", flat).Base(err)
-	}
 	return nil
 }
 
